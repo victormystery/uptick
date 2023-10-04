@@ -1,7 +1,7 @@
 name: uptick_task_1
 description: A Console-based Task Manager
 version: 1.0.0
-# repository: https://github.com/my_org/my_repo
+repository: https://github.com/victormystery/uptick.git
 
 environment:
   sdk: ^3.1.3
