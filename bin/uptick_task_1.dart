@@ -10,7 +10,10 @@ class Task {
 
 class TaskManager {
   List<Task> tasks = [];
-
+  TaskManager.withTask(List<Task> tasks) {
+    this.tasks.addAll(tasks);
+  }
+ 
   void addTask(Task task) {
     tasks.add(task);
   }
@@ -18,9 +21,10 @@ class TaskManager {
   void editTask(
       int index, String newTitle, String newDescription, bool isCompleted) {
     if (index >= 0 && index < tasks.length) {
-      tasks[index].title = newTitle;
-      tasks[index].description = newDescription;
-      tasks[index].isCompleted = isCompleted;
+      tasks[index]
+        ..title = newTitle
+        ..description = newDescription
+        ..isCompleted = isCompleted;
     } else {
       print("Invalid task index.");
     }
@@ -38,19 +42,20 @@ class TaskManager {
     if (tasks.isEmpty) {
       print("No tasks found.");
     } else {
-      for (int i = 1; i < tasks.length; i++) {
-        print("Task #$i:");
-        print("Title: ${tasks[i].title}");
-        print("Description: ${tasks[i].description}");
-        print("Status: ${tasks[i].isCompleted ? 'Completed' : 'Incomplete'}");
+      tasks.asMap().forEach((i, value) {
+        print("Task #${i + 1}: ");
+        print("Title: ${value.title}");
+        print("Description: ${value.description}");
+        print("Status: ${value.isCompleted ? 'Completed' : 'Incomplete'}");
         print("");
-      }
+      });
+      
     }
   }
 }
 
 void main() {
-  TaskManager taskManager = TaskManager();
+  TaskManager taskManager = TaskManager.withTask([]);
 
   while (true) {
     print("Console Task Manager");
